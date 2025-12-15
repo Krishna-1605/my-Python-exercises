@@ -1,0 +1,90 @@
+#student grade management system
+#store all the students
+students = []   #lists
+# Function to calculate average marks
+def calculate_average(marks):
+    total_marks = sum(marks.values())     # sum of all subject marks
+    number_of_subjects = len(marks)       # total number of subjects
+    average = total_marks / number_of_subjects
+    return average
+# Function to assign grade
+def assign_grade(average):
+    if average >= 90:
+        return "A"
+    elif average >= 75:
+        return "B"
+    elif average >= 60:
+        return "C"
+    elif average >= 40:
+        return "D"
+    else:
+        return "F"
+#add a student
+
+student1 = {
+    "name": "Krishna Nagini",
+    "age": 27,
+    "roll no": 16,
+    "marks": {"english": 67, "Maths": 74, "science": 58}
+}
+
+student2 = {
+    "name": "Palani",
+    "age": 30,
+    "roll no": 5,
+    "marks": {"english": 82, "Maths": 85, "science": 91}
+}
+#dictionaries
+#add student dictionary
+students.append(student1)
+students.append(student2)
+#display details
+print("student name:",  student1 ["name"], student2 ["name"])
+print("student age:", student1 ["age"], student2 ["age"])
+print("student age:",  student1 ["age"], student2 ["age"])
+print("student roll no:", student1 ["roll no"], student2 ["roll no"])
+print("student marks:",  student1 ["marks"], student2 ["marks"])
+#Display all students
+print("\nAll students data:")
+print(student1, student2)
+# Subject and new marks
+search_name = "krishna Nagini"
+subject = "Maths"
+new_marks = 85
+# Flag to check if student is found
+student_found = False
+# Loop through students list
+for student in students:
+    if student["name"] == search_name:
+        student_found = True
+
+        # Update marks if subject exists
+        if subject in student["marks"]:
+            student["marks"][subject] = new_marks
+            print("Marks updated successfully!")
+        else:
+            print("Subject not found!")
+
+# If student is not found
+if not student_found:
+    print("Student not found!")
+# Display updated student data
+print("\nUpdated Student Details:")
+print(students)
+# Call the function
+avg_marks = calculate_average(student1["marks"])
+avg_marks = calculate_average(student2["marks"])
+
+# Display result
+print("Student Name:", student1["name"], student2["name"])
+print("Average Marks:", avg_marks)
+# Example usage
+average_marks = 70
+
+grade = assign_grade(average_marks)
+
+print("Average Marks:", average_marks)
+print("Grade:", grade)
+# Display all students
+print("Student Details:\n")
+

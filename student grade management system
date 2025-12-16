@@ -1,12 +1,14 @@
 #student grade management system
 #store all the students
 students = []   #lists
+
 # Function to calculate average marks
-def calculate_average(marks):
+def calculate_average(marks): #Defines a function that receives marks
     total_marks = sum(marks.values())     # sum of all subject marks
     number_of_subjects = len(marks)       # total number of subjects
-    average = total_marks / number_of_subjects
-    return average
+    average = total_marks / number_of_subjects  #Calculates the average marks.
+    return average  #Sends the average value back to the program.
+
 # Function to assign grade
 def assign_grade(average):
     if average >= 90:
@@ -38,6 +40,12 @@ student2 = {
 #add student dictionary
 students.append(student1)
 students.append(student2)
+subjects = set()
+
+for student in students:
+    subjects.update(student["marks"].keys())
+
+print("Unique subjects offered:", subjects)
 #display details
 print("student name:",  student1 ["name"], student2 ["name"])
 print("student age:", student1 ["age"], student2 ["age"])
@@ -87,4 +95,19 @@ print("Average Marks:", average_marks)
 print("Grade:", grade)
 # Display all students
 print("Student Details:\n")
+print("\n----- REPORT CARD -----\n")
 
+for student in students:
+    average = calculate_average(student["marks"])
+    grade = assign_grade(average)
+
+    print(f"Student Name : {student['name']}")
+    print(f"Roll Number : {student['roll no']}")
+    print("Marks:")
+
+    for subject, marks in student["marks"].items():
+        print(f"  {subject.capitalize()} : {marks}")
+
+    print(f"Average Marks : {average:.2f}")
+    print(f"Grade         : {grade}")
+    print("-" * 30)

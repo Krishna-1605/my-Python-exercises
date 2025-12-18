@@ -1,0 +1,63 @@
+#monthly Budget
+monthly_budget = 5000.0
+
+# Dictionary to store categorized expenses
+categories = {
+    "food": [],
+    "travel": [],
+    "entertainment": [],
+    "other": []
+}
+#list to store al expenses
+expenses = []
+# Function to add an expense
+def add_expense(date, category, amount, description):
+    expense = (date, category, amount, description)
+    expenses.append(expense)
+    # Add expense to category dictionary
+    if category in categories:
+        categories[category].append(expense)
+    else:
+        categories["other"].append(expense)
+# Adding sample expenses
+add_expense("15-12-2025", "food", 250.50, "Lunch at restaurant")
+add_expense("16-12-2025", "travel", 120.00, "Bus ticket")
+add_expense("18-12-2025", "entertainment", 1200.00, "Movie")
+add_expense("17-12-2025", "shopping", 1500.00, "Clothes")
+
+# Calculate total spent
+total_spent = 0
+for expense in expenses:
+    total_spent += expense[2]
+
+# Calculate category-wise totals
+category_totals = {}
+for category, items in categories.items():
+    total = 0
+    for expense in items:
+        total += expense[2]
+    category_totals[category] = total
+
+# Calculate remaining budget
+budget_remaining = monthly_budget - total_spent
+
+# Calculate average daily expense
+unique_days = set()
+for expense in expenses:
+    unique_days.add(expense[0])
+
+average_daily_expense = total_spent / len(unique_days)
+
+# Display stored expenses
+print("All Expenses:")
+for expense in expenses:
+    print(expense)
+
+print("\nTotal Spent: ₹", total_spent)
+print("Budget Remaining: ₹", budget_remaining)
+
+print("\nCategory-wise Totals:")
+for category, total in category_totals.items():
+    print(category, ":", total)
+
+print("\nAverage Daily Expense: ₹", round(average_daily_expense, 2))

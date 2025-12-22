@@ -1,0 +1,70 @@
+# student grade management system
+# store all the students
+students = []
+
+# Function to calculate average marks
+def calculate_average(marks):
+    total_marks = sum(marks.values())
+    number_of_subjects = len(marks)
+    return total_marks / number_of_subjects
+
+# Function to assign grade
+def assign_grade(average):
+    if average >= 90:
+        return "A"
+    elif average >= 75:
+        return "B"
+    elif average >= 60:
+        return "C"
+    elif average >= 40:
+        return "D"
+    else:
+        return "F"
+
+# Add students
+student1 = {
+    "name": "Krishna Nagini",
+    "age": 27,
+    "roll no": 16,
+    "marks": {"english": 67, "Maths": 74, "science": 58}
+}
+
+student2 = {
+    "name": "Palani",
+    "age": 30,
+    "roll no": 5,
+    "marks": {"english": 82, "Maths": 85, "science": 91}
+}
+
+students.append(student1)
+students.append(student2)
+
+# -------------------------------
+# 1️⃣ USE SET TO TRACK UNIQUE SUBJECTS
+# -------------------------------
+subjects = set()
+
+for student in students:
+    subjects.update(student["marks"].keys())
+
+print("Unique subjects offered:", subjects)
+
+# -------------------------------
+# 2️⃣ FORMATTED REPORT CARD
+# -------------------------------
+print("\n----- REPORT CARD -----\n")
+
+for student in students:
+    average = calculate_average(student["marks"])
+    grade = assign_grade(average)
+
+    print(f"Student Name : {student['name']}")
+    print(f"Roll Number : {student['roll no']}")
+    print("Marks:")
+    
+    for subject, marks in student["marks"].items():
+        print(f"  {subject.capitalize()} : {marks}")
+
+    print(f"Average Marks : {average:.2f}")
+    print(f"Grade         : {grade}")
+    print("-" * 30)

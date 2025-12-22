@@ -3,6 +3,7 @@
 These exercises are designed based on the concepts practiced in this repository. Each project combines multiple Python fundamentals to create practical, real-world applications.
 
 ---
+these exercises are addressed in project1.py, project2.py, project3.py,
 
 ## Exercise 1: Student Grade Management System
 

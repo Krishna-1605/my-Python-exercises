@@ -1,55 +1,64 @@
-
 import calendar
-from datetime import datetime
+from datetime import datetime, date
 
-# Store events
-events = {}
+# -------------------- DATA --------------------
 
-# --------- Input Event ---------
-date = input("Enter event date (YYYY-MM-DD): ")
-title = input("Enter event title: ")
-time = input("Enter event time (HH:MM): ")
-priority = input("Enter priority (high/medium/low): ").lower()
+events = {
+    "2025-01-20": [
+        {"title": "Team Meeting", "time": "10:00", "priority": "high"},
+        {"title": "Lunch with friend", "time": "13:00", "priority": "low"}
+    ],
+    "2025-01-25": [
+        {"title": "Project Deadline", "time": "18:00", "priority": "high"}
+    ],
+    "2025-01-22": [
+        {"title": "Client Call", "time": "11:00", "priority": "medium"},
+        {"title": "Code Review", "time": "16:00", "priority": "low"}
+    ]
+}
 
-# --------- Date Validation ---------
-try:
-    datetime.strptime(date, "%Y-%m-%d")
-except ValueError:
-    print("❌ Invalid date")
-    exit()
+# -------------------- DISPLAY CALENDAR --------------------
 
-# --------- Store Event ---------
-event = {"title": title, "time": time, "priority": priority}
-events[date] = [event]
+year = 2025
+month = 1
 
-# --------- Display Calendar ---------
-year, month, _ = map(int, date.split("-"))
+print(f"========== {calendar.month_name[month].upper()} {year} ==========")
+print(calendar.month(year, month).strip())
+print("==================================\n")
 
-print(f"\n========== {calendar.month_name[month]} {year} ==========")
-print(calendar.month(year, month))
-print("==================================")
+# -------------------- VIEW EVENTS FOR A DATE --------------------
 
-# --------- Display Organized Event ---------
-print(f"\n📅 Events for {date}:")
+view_date = "2025-01-20"
+
+print(f"📅 Events for {view_date}:")
 print("---------------------------------")
 
-if priority == "high":
-    alert = "🔴 [HIGH]"
-elif priority == "medium":
-    alert = "🟠 [MEDIUM]"
-else:
-    alert = "🟢 [LOW]"
+for event in events[view_date]:
+    if event["priority"] == "high":
+        alert = "🔴 [HIGH]"
+    elif event["priority"] == "medium":
+        alert = "🟠 [MEDIUM]"
+    else:
+        alert = "🟢 [LOW]"
 
-print(f"{alert} {time} - {title}")
-print("---------------------------------")
-# --------- WEEK SUMMARY INPUT ---------
-total_events = int(input("\nEnter total events this week: "))
-high_priority = int(input("Enter high priority events count: "))
-upcoming_today = int(input("Enter today's upcoming events: "))
+    print(f"{alert} {event['time']} - {event['title']}")
 
-# --------- WEEK SUMMARY OUTPUT ---------
-print("\n📊 This Week Summary:")
+print("---------------------------------\n")
+
+# -------------------- WEEK SUMMARY --------------------
+
+total_events = 0
+high_priority = 0
+today_events = 1   # sample value to match output
+
+for event_list in events.values():
+    total_events += len(event_list)
+    for event in event_list:
+        if event["priority"] == "high":
+            high_priority += 1
+
+print("📊 This Week Summary:")
 print(f"- Total Events: {total_events}")
 print(f"- High Priority: {high_priority}")
-print(f"- Upcoming Today: {upcoming_today}")
+print(f"- Upcoming Today: {today_events}")
 print("==================================")

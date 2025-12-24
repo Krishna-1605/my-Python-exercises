@@ -53,3 +53,4 @@ print(f"- Total Events: {total_events}")
 print(f"- High Priority: {high_priority}")
 print(f"- Upcoming Today: {upcoming_today}")
 print("==================================")
+
